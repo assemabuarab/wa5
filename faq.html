@@ -12,7 +12,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="GoldFire"/>
     <meta property="og:locale" content="ar_AR"/>
-    <meta property="og:url" content="https://wa2.goldapk.app/faq.html"/>
+    <meta property="og:url" content="https://wa5.goldapk.app/faq.html"/>
     <meta property="og:title" content="الأسئلة الشائعة - واتساب الأسود"/>
     <meta property="og:description" content="أجوبة على أكثر الأسئلة شيوعاً حول تطبيق واتساب الأسود."/>
 
@@ -554,4 +554,79 @@
                 <h3 class="footer-section-title" data-lang="ar">روابط مفيدة</h3>
                 <h3 class="footer-section-title" data-lang="en">Useful Links</h3>
                 <div class="footer-links">
-                    <a href="https://t.me/AssemBlogger"><i class="fab fa-telegram"></i> <span data-lang="ar">قناة التليجرام</span>
+                    <a href="https://t.me/AssemBlogger"><i class="fab fa-telegram"></i> <span data-lang="ar">قناة التليجرام</span><span data-lang="en">Telegram Channel</span></a>
+                    <a href="/user-guide.html"><i class="fab fa-youtube"></i> <span data-lang="ar">دليل الاستخدام</span><span data-lang="en">User Guide</span></a>
+                    <a href="https://mediafiresm.appsfire.co/file/blackhelper"><i class="fas fa-mobile-alt"></i> <span data-lang="ar">تطبيقات أخرى</span><span data-lang="en">Other Apps</span></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 WhatsApp Black. <span data-lang="ar">جميع الحقوق محفوظة</span><span data-lang="en">All rights reserved</span></p>
+            <p class="disclaimer" data-lang="ar">
+                نحن لا نستضيف أي ملف على خوادمنا. جميع الروابط يتم توجيهها من مصادر خارجية موثوقة.
+                هذا التطبيق ليس تابعًا لشركة واتساب أو فيسبوك.
+            </p>
+            <p class="disclaimer" data-lang="en">
+                We do not host any files on our servers. All links are redirected from trusted external sources.
+                This app is not affiliated with WhatsApp or Facebook.
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userLang = navigator.language.startsWith("ar") ? "ar" : "en";
+            setLanguage(userLang);
+            
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const arrowIcon = question.querySelector('i');
+                    
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== question && otherQuestion.classList.contains('active')) {
+                            otherQuestion.classList.remove('active');
+                            otherQuestion.nextElementSibling.style.display = 'none';
+                            otherQuestion.nextElementSibling.style.maxHeight = null;
+                            otherQuestion.querySelector('i').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    
+                    question.classList.toggle('active');
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                        arrowIcon.style.transform = 'rotate(0deg)';
+                    } else {
+                        answer.style.display = 'block';
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        arrowIcon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        });
+
+        function setLanguage(selectedLang) {
+            document.documentElement.lang = selectedLang;
+            document.documentElement.dir = selectedLang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            document.querySelectorAll(`[data-lang="${selectedLang}"]`).forEach(el => {
+                el.style.display = 'block';
+            });
+            
+            if (selectedLang === 'ar') {
+                document.querySelectorAll('.show-ar').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.show-en').forEach(el => el.style.display = 'none');
+            } else {
+                document.querySelectorAll('.show-ar').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.show-en').forEach(el => el.style.display = 'block');
+            }
+        }
+    </script>
+</body>
+</html>
